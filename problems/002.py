@@ -11,27 +11,22 @@ Find the sum of all the even-valued terms in the sequence which do not
 exceed four million.
 """
 
-def fibonacci_up_to(limit):
+def sum_even_fibonacci(limit):
     """
-    Generate list of fibonacci numbers up to a given limit.
+    Generate list of fibonacci numbers up to a given limit, then calculate 
+    the sum of the even terms of that list.
     """
     a, b = 0, 1
     fib_sequence = []
 
+    # Generate fibonacci list up to limit
     while a <= limit:
         fib_sequence.append(a)
         a, b = b, a + b
     
-    return fib_sequence
-
-def sum_even_fibonacci(limit):
-    """
-    Calculate sum of even fibonacci numbers up to a given limit.
-    """
     sum = 0
-    sequence = fibonacci_up_to(limit)
 
-    for i in sequence:
+    for i in fib_sequence:
         # Add even fibonacci numbers to the sum
         if i % 2 == 0:
             sum += i
