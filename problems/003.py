@@ -37,4 +37,5 @@ def max_prime_factor(number):
     return largest_prime_factor
      
 if __name__ == "__main__":
-    print(max_prime_factor(600851475143))
+    user_num = int(input("Enter number to find its largest prime factor: "))
+    print(max_prime_factor(user_num))

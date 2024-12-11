@@ -34,4 +34,5 @@ def sum_even_fibonacci(limit):
     return sum
 
 if __name__ == "__main__":
-    print(sum_even_fibonacci(4000000))
+    user_num = int(input("Enter number to find the sum of all even-valued fibonacci numbers that do not exceed it: "))
+    print(sum_even_fibonacci(user_num))
