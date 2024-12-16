@@ -9,15 +9,16 @@ What is the 10001st prime number?
 """
 
 
-def find_prime_number():
+def find_prime_number(number):
     """
-    Finds the 10,001st prime number using a while loop to generate prime numbers, and
-    stops once the 10,001st prime is found.
+    Finds the Nth prime number using a while loop to generate list of prime numbers,
+    stopping once the Nth prime is found.
     """
+
     primes = [2]  # List to store prime numbers, starting with first prime
     start = 3  # Begin checking candidates from next integer
 
-    while len(primes) < 10001:
+    while len(primes) < number:  # Generate primes until required count is reached
         is_prime = True
         # Check divisibility of start by all numbers up to its square root
         for divisor in range(2, int(start**0.5) + 1):
@@ -29,8 +30,10 @@ def find_prime_number():
 
         start += 1  # Increment to next candidate number
 
-    return primes[-1]  # Return last prime in list
+    return primes[-1]  # Return the Nth prime number
 
 
 if __name__ == "__main__":
-    print(find_prime_number())
+    # Get user input for which prime number to find
+    user_number = int(input("Enter the prime number would you like to find: "))
+    print(find_prime_number(user_number))
