@@ -64,6 +64,12 @@ def max_product():
 
     #  Iterate over string to calculate products of 13-digit windows
     while True:
+        #  Skip windows with '0' since product will always be zero
+        if "0" in number_str[start_index:end_index]:
+            start_index += 1
+            end_index = start_index + 13
+            continue
+
         for digit in number_str[start_index:end_index]:
             product *= int(digit)  #  Multiple each digit in current window
         products_list.append(product)  #  Add result to list
