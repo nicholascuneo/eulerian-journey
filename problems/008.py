@@ -28,34 +28,56 @@ number.
 """
 
 
-def solve(number):
-    """ """
+def max_product():
+    """
+    Finds the maximum product of 13 consecutive integers in large number.
 
-    #  Create empty list for digits and convert number to string
-    num_digits = []
-    num_string = str(number)
+    Function processes a large number, divides it into overlapping 13-digit segments,
+    calculates the product of the digits in each segment, and returns the maximum
+    product found.
+    """
 
-    #  Add each digit to list
-    for digit in num_string:
-        num_digits.append(digit)
+    long_number = int(
+        "731671765313306249192251196744265747423553491949349698352031277450632623957831"
+        "801698480186947885184385861560789112949495459501737958331952853208805511125406"
+        "987471585238630507156932909632952274430435576689664895044524452316173185640309"
+        "871112172238311362229893423380308135336276614282806444486645238749303589072962"
+        "904915604407723907138105158593079608667017242712188399879790879227492190169972"
+        "088809377665727333001053367881220235421809751254540594752243525849077116705560"
+        "136048395864467063244157221553975369781797784617406495514929086256932197846862"
+        "248283972241375657056057490261407972968652414535100474821663704844031998900088"
+        "952434506585412275886668811642717147992444292823086346567481391912316282458617"
+        "866458359124566529476545682848912883142607690042242190226710556263211111093705"
+        "442175069416589604080719840385096245544436298123098787992724428490918884580156"
+        "166097919133875499200524063689912560717606058861164671094050775410022569831552"
+        "0005593572972571636269561882670428252483600823257530420752963450"
+    )
 
-    #  FIXME
+    #  Convert to string to access individual digits
+    number_str = str(long_number)
+
+    #  Initialize variables
+    product = 1  #  Stores product of 13 current digits, intialized with 1
     start_index = 0
-    end_index = start_index + 13
-    digit_nums = []
+    end_index = start_index + 13  #  Define range for 13-digit window
+    products_list = []  #  List to store all calculated products
 
-    #  Convert back to integers
-    for element in num_digits:
-        digit_nums.append(int(element))
+    #  Iterate over string to calculate products of 13-digit windows
+    while True:
+        for digit in number_str[start_index:end_index]:
+            product *= int(digit)  #  Multiple each digit in current window
+        products_list.append(product)  #  Add result to list
+        product = 1  #  Reset product for next window
+        start_index += 1  #  Move the window forward by 1
+        end_index = start_index + 13  #  Update end of window
 
-    #  Use list comprehension for cumulative product of consecutive numbers
-    cumulative_product = [prod := digit_nums[start_index]] + [
-        prod := prod * x for x in digit_nums[start_index + 1 : end_index]
-    ]
+        #  Exit loop when next window has fewer then 13 digits
+        if len(number_str[start_index:end_index]) < 13:
+            break
 
-    return cumulative_product
+    #  Return max product from all windows
+    return max(products_list)
 
 
 if __name__ == "__main__":
-    user_number = int(input("Enter num: "))
-    print(solve(user_number))
+    print(max_product())
