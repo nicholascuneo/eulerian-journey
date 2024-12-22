@@ -46,16 +46,13 @@ def find_triplet_product():
     Return:
     The product of the triplet [a, b, c] as an integer if its sum equals 1000.
     """
-    for smaller_value in range(501):  # Loop over n from 0 to 500
-        for larger_value in range(501):  # Loop over m from 0 to 500
-            if (
-                larger_value > smaller_value > 0
-            ):  # Ensure valid input for Euclid's formula
-                triplet = generate_triplet(
-                    smaller_value, larger_value
-                )  # Generate triplet
-                if sum(triplet) == 1000:  # Check if sum of triplet = 1000
-                    return np.prod(triplet)  # Calculate and return product of triplet
+    for smaller_value in range(1, 501):  # Start n from 1 since n > 0
+        for larger_value in range(smaller_value + 1, 501):  # Ensure m > n
+            triplet = generate_triplet(smaller_value, larger_value)
+            if sum(triplet) > 1000:  # Exit inner loop if sum exceeds 1000
+                break
+            if sum(triplet) == 1000:  # Check if sum of triplet = 1000
+                return np.prod(triplet)  # Calculate and return product of triplet
 
 
 if __name__ == "__main__":
