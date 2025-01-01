@@ -1,5 +1,11 @@
+# Ignore virtual environment directory
 venv/
+
 __pycache__/
 *.pyc
 
+# Ignore VSCode launch configuration for debugging
 .vscode/launch.json
+
+# Ignore scratchpad file used for testing code snippets
+scratchpad.py
