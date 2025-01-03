@@ -26,29 +26,51 @@ divisors?
 """
 
 
-def solve():
-    natural_nums = [1]
-    triangle_nums = [1]
-    triangle_nums_and_divisors = {1: [1]}
-    divisors = []
-    start = 2
+def triangle_with_divisors():
+    """
+    Finds the first triangular number that has over 500 divisors.
 
-    while len(triangle_nums_and_divisors) < 501:
-        natural_nums.append(start)
-        triangle = sum(natural_nums)
-        triangle_nums.append(triangle)
+    A triangular number is the sum of the natural numbers up to a certain point.
+    For example, the 7th triangular number is 1 + 2 + 3 + 4 + 5 + 6 + 7 = 28.
 
-        for i in range(1, triangle + 1):
+    Returns:
+    The first triangular number with over 500 divisors as an integer.
+
+    """
+    natural_numbers = [1]  # Initialize list of natural numbers with first natural
+    triangle_numbers = [1]  # Initialize list of triangle numbers with first triangle
+    triangle_divisors = {1: [1]}  # Dict of triangle numbers to list of their divisors
+    divisors = []  # Temp list to store divisors of current triangle number
+    next_natural = 2  # Counter to track next natural number
+    current_triangle = 1  # Most recently computed triangle number
+
+    # Loop until a triangle number with more than 500 divisors is found
+    while len(triangle_divisors[current_triangle]) <= 500:
+        natural_numbers.append(next_natural)  # Append next natural number
+        triangle = sum(natural_numbers)  # Compute next triangle number
+        triangle_numbers.append(triangle)  # Append new triangle number
+
+        # Find divisors of the triangle number
+        for i in range(1, int(triangle**0.5) + 1):
             if triangle % i == 0:
-                divisors.append(i)
+                divisors.append(i)  # Add divisor
+                if i != triangle // i:  # Avoid adding square root twice
+                    divisors.append(triangle // i)  # Add the complementary divisor
 
-        triangle_nums_and_divisors[triangle] = divisors
+        # Store divisors in dictionary
+        triangle_divisors[triangle] = divisors
+
+        # Reset divisor list for next triangle number
         divisors = []
 
-        start += 1
+        # Update current triangle number to the latest one
+        current_triangle = triangle
 
-    return triangle_nums_and_divisors
+        # Increment natural number counter
+        next_natural += 1
+
+    return current_triangle  # First triangle number with over 500 divisors
 
 
 if __name__ == "__main__":
-    print(solve())
+    print(triangle_with_divisors())
