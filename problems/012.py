@@ -27,17 +27,27 @@ divisors?
 
 
 def solve():
-    divisors = [1]
+    natural_nums = [1]
+    triangle_nums = [1]
+    triangle_nums_and_divisors = {1: [1]}
+    divisors = []
     start = 2
 
-    while len(divisors) < 501:
-        for i in range(1, start + 1):
-            if start % i == 0:
-                if i not in divisors:
-                    divisors.append(i)
+    while len(triangle_nums_and_divisors) < 501:
+        natural_nums.append(start)
+        triangle = sum(natural_nums)
+        triangle_nums.append(triangle)
+
+        for i in range(1, triangle + 1):
+            if triangle % i == 0:
+                divisors.append(i)
+
+        triangle_nums_and_divisors[triangle] = divisors
+        divisors = []
+
         start += 1
 
-    return divisors
+    return triangle_nums_and_divisors
 
 
 if __name__ == "__main__":
